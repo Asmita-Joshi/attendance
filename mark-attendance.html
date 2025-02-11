@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance</title>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+    apiKey: "AIzaSyByxQPFqr3-Chj9mhd5WQR_vLLKN2A81E0",
+    authDomain: "qr-attendance-9bd4f.firebaseapp.com",
+    projectId: "qr-attendance-9bd4f",
+    storageBucket: "qr-attendance-9bd4f.firebasestorage.app",
+    messagingSenderId: "493681259510",
+    appId: "1:493681259510:web:19b4144892f0bf563c4dd7",
+    measurementId: "G-YW42MDP24K"
+  };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function markAttendance() {
+            try {
+                await addDoc(collection(db, "attendance"), {
+                    user: "User123",
+                    timestamp: serverTimestamp()
+                });
+
+                document.getElementById("message").innerText = "Attendance Marked Successfully!";
+                setTimeout(() => {
+                    window.location.href = "https://Asmita-Joshi.github.io/attendance/thank-you.html";
+                }, 2000);
+            } catch (error) {
+                console.error("Error marking attendance:", error);
+            }
+        }
+
+        window.onload = markAttendance;
+    </script>
+</head>
+<body>
+    <h1 id="message">Marking Attendance...</h1>
+</body>
+</html>

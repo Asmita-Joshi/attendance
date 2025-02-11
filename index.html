@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Attendance</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+</head>
+<body>
+    <h1>Scan the QR Code to Mark Attendance</h1>
+    <div id="qrcode"></div>
+
+    <script>
+        let scanURL = "https://Asmita-Joshi.github.io/attendance/mark-attendance.html";
+        let qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: scanURL,
+            width: 200,
+            height: 200
+        });
+    </script>
+</body>
+</html>
