@@ -6,7 +6,7 @@
     <title>Mark Attendance</title>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+        import { getFirestore, collection, query, where, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
         // Firebase Configuration
         const firebaseConfig = {
@@ -22,10 +22,35 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // Generate a Unique Device ID using localStorage
+        function getDeviceId() {
+            let deviceId = localStorage.getItem("device_id");
+            if (!deviceId) {
+                deviceId = "device_" + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem("device_id", deviceId);
+            }
+            return deviceId;
+        }
+
         async function markAttendance() {
+            const deviceId = getDeviceId();
+            const attendanceRef = collection(db, "attendance");
+            const q = query(attendanceRef, where("deviceId", "==", deviceId));
+
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+                document.getElementById("message").innerText = "Attendance Already Marked!";
+                setTimeout(() => {
+                    window.location.href = "https://Asmita-Joshi.github.io/attendance/index.html";
+                }, 3000);
+                return;
+            }
+
+            // Mark attendance if not already marked
             try {
-                await addDoc(collection(db, "attendance"), {
-                    user: "User123",
+                await addDoc(attendanceRef, {
+                    deviceId: deviceId,
                     timestamp: serverTimestamp()
                 });
 
