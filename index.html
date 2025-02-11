@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Attendance</title>
+    <title>QR Code Scanner</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 </head>
 <body>
-    <h1>Scan the QR Code to Mark Attendance</h1>
+    <h2>Scan the QR Code to Attendance</h2>
     <div id="qrcode"></div>
-
-    <!-- Download QR Code Button -->
     <br>
     <button id="downloadBtn">Download QR Code</button>
 
@@ -20,22 +18,27 @@
         let scanURL = "https://Asmita-Joshi.github.io/attendance/mark-attendance.html";
         let qrcodeDiv = document.getElementById("qrcode");
 
-        let qrcode = new QRCode(qrcodeDiv, {
-            text: scanURL,
-            width: 200,
-            height: 200
-        });
-
         document.getElementById("downloadBtn").addEventListener("click", function() {
             let qrCanvas = qrcodeDiv.getElementsByTagName("canvas")[0];
             let qrImage = qrCanvas.toDataURL("image/png");
 
             let downloadLink = document.createElement("a");
             downloadLink.href = qrImage;
-            downloadLink.download = "QR_Attendance.png";
+            downloadLink.download = "QR_Scan.png";
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
+        });
+    </script>
+    <script>
+        // URL of event.html (Replace with actual hosted link)
+        var eventUrl = "https://Asmita-Joshi.github.io/attendance/mark-attendance.html";
+
+        // Generate QR code
+        var qr = new QRCode(document.getElementById("qrcode"), {
+            text: eventUrl,
+            width: 200,
+            height: 200
         });
     </script>
 </body>
