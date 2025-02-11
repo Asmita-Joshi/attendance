@@ -3,20 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Attendance</title>
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <title>QR Code Attendance System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 10px;
+        }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+
+        .download-btn {
+            background-color: #28a745;
+        }
+
+            .download-btn:hover {
+                background-color: #218838;
+            }
+    </style>
 </head>
 <body>
-    <h1>Scan the QR Code to Mark Attendance</h1>
-    <div id="qrcode"></div>
 
-    <script>
-        let scanURL = "https://Asmita-Joshi.github.io/attendance/mark-attendance.html";
-        let qrcode = new QRCode(document.getElementById("qrcode"), {
-            text: scanURL,
-            width: 200,
-            height: 200
-        });
-    </script>
+    <h1>QR Code Attendance System</h1>
+
+    <!-- Scan QR Code Button -->
+    <a class="btn" href="mark-attendance.html">Scan QR Code</a>
+
+    <!-- Download Scanner Button -->
+    <a class="btn download-btn" href="https://play.google.com/store/apps/details?id=com.gamma.scan" target="_blank">
+        Download Scanner
+    </a>
+
 </body>
 </html>
